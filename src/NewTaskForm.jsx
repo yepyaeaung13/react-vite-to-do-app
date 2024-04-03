@@ -1,19 +1,4 @@
-const NewTaskForm = ({ setTasks }) => {
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const form = document.querySelector("#taskForm");
-    const formData = new FormData(form);
-    const currentTask = formData.get("task");
-
-    setTasks((tasks) => {
-      return [
-        ...tasks,
-        { title: currentTask, id: crypto.randomUUID(), completed: false },
-      ];
-    });
-    form.reset();
-  };
-
+const NewTaskForm = () => {
   return (
     <form onSubmit={submitHandler} id="taskForm">
       <div className="flex mb-3">

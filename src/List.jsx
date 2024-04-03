@@ -1,16 +1,29 @@
 import React from "react";
 
-const List = ({ id, job, isDone }) => {
+const List = ({ id, job, isDone, checked, deleteTask }) => {
+  const handleCheckBox = () => {
+    checked(id);
+  };
+  const handleDeleteBtn = () => {
+    if (confirm("are you sure to delete?")) {
+      deleteTask(id);
+    }
+  };
   return (
-    <li className="list group flex animate__animated animate__fadeInUp bg-zinc-50 justify-between border border-zinc-600 p-2 items-center mb-3 overflow-hidden rounded text-xs">
+    <li
+      className={`list group flex animate__animated animate__fadeInUp bg-zinc-50 justify-between border border-zinc-600 p-2 items-center mb-3 overflow-hidden rounded text-xs ${
+        isDone && "bg-gray-200 pointer-events-none"
+      }`}
+    >
       <div className="list-text-box flex items-center">
         <div className="flex gap-2 items-center">
           <input
             type="checkbox"
             className="check-box accent-zinc-700"
             checked={isDone}
+            onChange={handleCheckBox}
           />
-          <label className="list-text">{job}</label>
+          <label className={`${isDone && "line-through"}`}>{job}</label>
         </div>
       </div>
       <div className="flex gap-3 items-center duration-300 translate-x-[120%] group-hover:translate-x-0">
@@ -30,7 +43,10 @@ const List = ({ id, job, isDone }) => {
             />
           </svg>
         </button>
-        <button className="list-del-btn border duration-200 active:scale-90 border-zinc-700 p-1">
+        <button
+          className="list-del-btn border duration-200 active:scale-90 border-zinc-700 p-1"
+          onClick={handleDeleteBtn}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

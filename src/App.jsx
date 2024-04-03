@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+
   const addTask = (job) => {
     const newTask = {
       id: Date.now(),

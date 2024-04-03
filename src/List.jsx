@@ -26,7 +26,7 @@ const List = ({ id, job, isDone, checked, deleteTask, updateTask }) => {
   return (
     <li
       className={`list group flex animate__animated animate__fadeInUp bg-zinc-50 justify-between border border-zinc-600 p-2 items-center mb-3 overflow-hidden rounded text-xs ${
-        isDone && "bg-gray-200 pointer-events-none"
+        isDone && "bg-gray-300/40 pointer-events-none"
       }`}
     >
       <div className="list-text-box flex items-center">

@@ -7,6 +7,7 @@ const NewTaskForm = ({ addTask }) => {
   };
   const handleAddBtn = () => {
     addTask(text);
+    setText("");
   };
 
   return (
@@ -18,6 +19,11 @@ const NewTaskForm = ({ addTask }) => {
         className="px-2 py-1 w-full border border-gray-400"
         value={text}
         onChange={handleTextInput}
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            handleAddBtn();
+          }
+        }}
       />
       <button
         onClick={handleAddBtn}

@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-const List = ({ id, job, isDone, checked, deleteTask }) => {
+const List = ({ id, job, isDone, checked, deleteTask, updateTask }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [newJob, setNewJob] = useState(job);
   const handleCheckBox = () => {
     checked(id);
   };
   const handleDeleteBtn = () => {
     if (confirm("are you sure to delete?")) {
       deleteTask(id);
+    }
+  };
+  const handleEditBtn = () => {
+    setIsEdit(!isEdit);
+  };
+  const handleNewTextInput = (e) => {
+    setNewJob(e.target.value);
+  };
+  const handleNewJob = (e) => {
+    if (e.key === "Enter") {
+      updateTask(newJob, id);
+      handleEditBtn();
     }
   };
   return (
@@ -22,12 +36,29 @@ const List = ({ id, job, isDone, checked, deleteTask }) => {
             className="check-box accent-zinc-700"
             checked={isDone}
             onChange={handleCheckBox}
+            disabled={isEdit}
           />
-          <label className={`${isDone && "line-through"}`}>{job}</label>
+          <label
+            className={`${isDone && "line-through"} ${isEdit && "hidden"}`}
+          >
+            {job}
+          </label>
+        </div>
+        <div className={`ms-2 border ${!isEdit && "hidden"}`}>
+          <input
+            type="text"
+            className="py-1 px-2 focus:outline-none border border-gray-400"
+            value={newJob}
+            onChange={handleNewTextInput}
+            onKeyUp={handleNewJob}
+          />
         </div>
       </div>
       <div className="flex gap-3 items-center duration-300 translate-x-[120%] group-hover:translate-x-0">
-        <button className="list-edit-btn border duration-200 active:scale-90 border-zinc-700 p-1">
+        <button
+          className="list-edit-btn border duration-200 active:scale-90 border-zinc-700 p-1"
+          onClick={handleEditBtn}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

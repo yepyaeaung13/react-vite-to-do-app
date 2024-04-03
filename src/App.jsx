@@ -34,6 +34,16 @@ const App = () => {
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
+  const updateTask = (newJob, id) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task.job = newJob;
+        }
+        return task;
+      })
+    );
+  };
   return (
     <div className="w-96 min-h-96 mx-auto p-5 mt-5 bg-zinc-100">
       <Heading />
@@ -44,6 +54,7 @@ const App = () => {
         setTasks={setTasks}
         checked={checked}
         deleteTask={deleteTask}
+        updateTask={updateTask}
       />
     </div>
   );

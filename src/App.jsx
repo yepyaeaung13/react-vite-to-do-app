@@ -5,13 +5,7 @@ import ListGroup from "./ListGroup";
 import { useState } from "react";
 
 const App = () => {
-  const [tasks, setTasks] = useState([
-    { id: 1, job: "Complete project proposal", isDone: false },
-    { id: 2, job: "Attend team meeting", isDone: false },
-    { id: 3, job: "Prepare presentation slides", isDone: false },
-    { id: 4, job: "Review code changes", isDone: false },
-    { id: 5, job: "Send progress report", isDone: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
   const addTask = (job) => {
     const newTask = {
       id: Date.now(),

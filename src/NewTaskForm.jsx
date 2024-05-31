@@ -16,7 +16,7 @@ const NewTaskForm = ({ addTask }) => {
         name="task"
         type="text"
         placeholder="enter your task"
-        className="px-2 py-1 w-full border border-gray-400"
+        className="px-2 py-1 w-full border border-gray-400 focus:outline-none"
         value={text}
         onChange={handleTextInput}
         onKeyUp={(e) => {

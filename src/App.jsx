@@ -2,10 +2,20 @@ import Heading from "./Heading";
 import NewTaskForm from "./NewTaskForm";
 import StatusList from "./StatusList";
 import ListGroup from "./ListGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const localValue = localStorage.getItem("TODO");
+    if (localValue == null) {
+      return [];
+    }
+    return JSON.parse(localValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("TODO", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (job) => {
     const newTask = {
